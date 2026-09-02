@@ -201,10 +201,33 @@
             flex-shrink: 0;
         }
 
-        .header-balance {
-            width: 44px;
-            height: 44px;
-            flex-shrink: 0;
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            background: var(--accent);
+            color: #ffffff;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 10px 18px;
+            border-radius: 999px;
+            line-height: 1.2;
+            box-shadow: 0 6px 16px rgba(242, 101, 34, 0.32);
+            transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .nav-cta:hover,
+        .nav-cta.is-active {
+            background: var(--accent-hover);
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(242, 101, 34, 0.4);
+        }
+
+        .nav-cta-short {
+            display: none;
         }
 
         .menu-toggle {
@@ -889,14 +912,18 @@
             background: var(--primary);
             border: none;
             box-shadow: var(--shadow-md);
-            height: 100%;
-            min-height: 392px;
+            height: auto;
+            min-height: 0;
+            max-width: 480px;
+            width: 100%;
+            justify-self: center;
+            border-radius: var(--radius-lg);
         }
 
         .about-photo-card img {
             width: 100%;
-            height: 100%;
-            min-height: 392px;
+            height: 420px;
+            min-height: 0;
             object-fit: cover;
             object-position: center 18%;
             display: block;
@@ -1133,11 +1160,38 @@
             flex-shrink: 0;
         }
 
+        .craftsman-join {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 16px;
+        }
+
         .craftsman-join h4 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #f1f5f9;
+            margin: 0;
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.5;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .craftsman-join-btn {
+            flex-shrink: 0;
+            border-radius: 999px;
+            padding: 12px 22px;
+            box-shadow: 0 8px 20px rgba(242, 101, 34, 0.38);
+        }
+
+        .craftsman-join-btn:hover {
+            transform: translateY(-2px);
         }
 
         .craftsman-action {
@@ -1559,8 +1613,9 @@
                 display: flex;
             }
 
-            .header-balance {
-                display: none;
+            .nav-cta {
+                padding: 8px 12px;
+                font-size: 0.82rem;
             }
 
             .nav-menu {
@@ -1658,13 +1713,28 @@
                 text-align: start;
             }
 
-            .about-photo-card,
+            .about-photo-card {
+                max-width: 420px;
+            }
+
             .about-photo-card img {
-                min-height: 260px;
+                height: 280px;
             }
 
             .craftsman-content {
                 padding: 32px 24px;
+            }
+
+            .craftsman-join {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 14px;
+            }
+
+            .craftsman-join-btn {
+                width: 100%;
+                justify-content: center;
             }
 
             .craftsman-content h3,
@@ -1720,6 +1790,14 @@
 
             .nav-container {
                 padding: 8px 10px 8px 8px;
+            }
+
+            .nav-cta-full {
+                display: none;
+            }
+
+            .nav-cta-short {
+                display: inline;
             }
 
             .logo-area img {
@@ -1860,6 +1938,19 @@
             color: var(--primary);
         }
 
+        header.on-dark .nav-cta,
+        header.on-dark .nav-cta:hover,
+        header.on-dark .nav-cta.is-active,
+        header.menu-open .nav-cta {
+            color: #ffffff;
+            background: var(--accent);
+        }
+
+        header.on-dark .nav-cta:hover,
+        header.on-dark .nav-cta.is-active {
+            background: var(--accent-hover);
+        }
+
         header.on-dark .nav-menu a,
         header.on-dark .header-left-icon a {
             color: #f8fafc;
@@ -1925,12 +2016,14 @@
                 <a href="#about">من نحن</a>
                 <a href="#services">خدماتنا</a>
                 <a href="#projects">أعمالنا السابقة</a>
-                <a href="#craftsman">انضم إلينا كحرفي</a>
                 <a href="#contact">اتصل بنا</a>
             </nav>
 
             <div class="header-actions">
-                <span class="header-balance" aria-hidden="true"></span>
+                <a href="#craftsman" class="nav-cta">
+                    <span class="nav-cta-full">انضم إلينا كحرفي</span>
+                    <span class="nav-cta-short">انضم كحرفي</span>
+                </a>
                 <button type="button" class="menu-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="main-nav">
                     <span></span>
                     <span></span>
@@ -2194,8 +2287,9 @@
                     </ul>
                     <div class="craftsman-join">
                         <h4>انضم إلى فريق ركيزة اليوم</h4>
-                        <a href="tel:0597199099" class="btn-primary">
-                            <i class="fa-solid fa-user-plus"></i> انضم كحرفي الآن
+                        <a href="tel:0597199099" class="btn-primary craftsman-join-btn">
+                            <i class="fa-solid fa-user-plus"></i>
+                            انضم كحرفي الآن
                         </a>
                     </div>
                 </div>
@@ -2436,7 +2530,7 @@
         })();
 
         (function () {
-            var links = Array.prototype.slice.call(document.querySelectorAll('#main-nav a[href^="#"]'));
+            var links = Array.prototype.slice.call(document.querySelectorAll('#main-nav a[href^="#"], .nav-cta'));
             if (!links.length) return;
 
             var items = links.map(function (link) {
@@ -2654,10 +2748,10 @@
 
                 if (isDesktop) {
                     gsap.fromTo('#about .about-photo-card img',
-                        { scale: 1.12, yPercent: -6 },
+                        { scale: 1.06, yPercent: -2 },
                         {
                             scale: 1,
-                            yPercent: 6,
+                            yPercent: 2,
                             ease: 'none',
                             scrollTrigger: {
                                 trigger: '#about .about-photo-card',
